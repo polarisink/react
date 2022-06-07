@@ -144,7 +144,7 @@ class Game extends React.Component {
         return;
       }
       //下一步的历史步骤的索引
-      const stepnm = current.index + 1;
+      const stepNm = current.index + 1;
       //将本次操作添加到历史步骤的队尾
       squares[i] = this.state.xIsNext ? "X" : "O";
       const his = history.concat([
@@ -152,18 +152,18 @@ class Game extends React.Component {
           squares: squares,
           detail: [row, col],
           which: squares[i],
-          index: stepnm,
+          index: stepNm,
         },
       ]);
 
       this.setState({
         history: his,
-        stepNumber: stepnm,
-        stepIndex: stepnm,
+        stepNumber: stepNm,
+        stepIndex: stepNm,
         xIsNext: !this.state.xIsNext,
       });
       //触发更新渲染历史步骤
-      this.getHistoryList(his, stepnm);
+      this.getHistoryList(his, stepNm);
     }
   }
   //点击某一个历史步骤,stepIndex=当前点击的历史步骤集合的索引，newHistory=新集合的列表
@@ -187,14 +187,14 @@ class Game extends React.Component {
   //点击排序
   changeSort() {
     //复制一个历史步骤集合
-    var history = this.state.history.slice();
+    let history = this.state.history.slice();
     //上一步的逻辑索引
-    var oldIndex = history[this.state.stepNumber].index;
+    let oldIndex = history[this.state.stepNumber].index;
     //翻转历史记录
     const his = history.reverse();
     //获取新的stepNumber（历史步骤列表的当前的索引）
     //而stepIndex则不用改变
-    var newIndex = null;
+    let newIndex = null;
     for (var i = 0; i < his.length; i++) {
       if (his[i].index === oldIndex) {
         newIndex = i;
@@ -210,7 +210,7 @@ class Game extends React.Component {
   }
   //触发更新渲染历史步骤,据目前所知如果要同步获得setState之后state的值，需要使用回调，暂时使用传参来保证数据一致。。。
   //newHistory=历史步骤集合,stepind=当前步骤的逻辑索引
-  getHistoryList(newHistory, stepind) {
+  getHistoryList(newHistory, stepInd) {
     //重新构造moves，即右侧的历史记录列表
     const moves = [];
     newHistory.map((step, move) => {
@@ -219,7 +219,7 @@ class Game extends React.Component {
         ? "Go to move #" + step.index
         : "Go to game start";
       //是否是当前列表
-      const active = step.index === stepind ? " active " : " ";
+      const active = step.index === stepInd ? " active " : " ";
       //此步骤是X还是O
       const which = step.which ? step.which + " : " : "";
       //step.detail是此步骤的具体坐标
